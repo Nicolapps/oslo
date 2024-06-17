@@ -27,6 +27,7 @@ export class OAuth2Client {
 		codeVerifier?: string;
 		codeChallengeMethod?: "S256" | "plain";
 		scopes?: string[];
+		hostedDomain?: string;
 	}): Promise<URL> {
 		const scopes = Array.from(new Set(options?.scopes ?? [])); // remove duplicates
 		const authorizationUrl = new URL(this.authorizeEndpoint);
@@ -40,6 +41,9 @@ export class OAuth2Client {
 		}
 		if (this.redirectURI !== null) {
 			authorizationUrl.searchParams.set("redirect_uri", this.redirectURI);
+		}
+		if (options?.hostedDomain !== undefined) {
+			authorizationUrl.searchParams.set("hd", options.hostedDomain);
 		}
 		if (options?.codeVerifier !== undefined) {
 			const codeChallengeMethod = options?.codeChallengeMethod ?? "S256";

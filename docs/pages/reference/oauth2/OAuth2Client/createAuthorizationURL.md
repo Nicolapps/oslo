@@ -16,6 +16,7 @@ function createAuthorizationURL(options?: {
 	codeChallengeMethod?: "S256" | "plain";
 	codeVerifier?: string;
 	scopes?: string[];
+	hostedDomain?: string;
 }): Promise<URL>;
 ```
 
@@ -26,6 +27,7 @@ function createAuthorizationURL(options?: {
   - `codeVerifier`: Code verifier for PKCE flow
   - `codeChallengeMethod` (default: `"S256"`): Ignored if `codeVerifier` is undefined
   - `scopes`: An array of scopes
+  - `hostedDomain`: The domain of a Google Cloud organization (e.g. `mycollege.edu`) for which the login experience is optimized (see the [Google documentation](https://developers.google.com/accounts/docs/OAuth2Login#hd-param)).
 
 ## Example
 
